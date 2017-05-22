@@ -18,11 +18,16 @@ namespace MapEditor
         private const int tileset_width = 256;
 
         private string name;
+        public string Name
+        {
+            get { return name; }
+        }
         private int id;
         public int ID
         {
             get { return id; }
         }
+        public string filename;
 
         private PictureBox pictureBox_tileset;
         private PictureBox pictureBox_map;
@@ -38,6 +43,10 @@ namespace MapEditor
         private int tile_select_width = 32;
         private int tile_select_height = 32;
         private int tileset_id;
+        public int Tileset_id
+        {
+            get { return tileset_id; }
+        }
 
         private Image[,] tile;
         private Image tileset;
@@ -47,7 +56,15 @@ namespace MapEditor
         private int map_width;
         private int map_height;
         private int map_tile_count_x;
+        public int Map_tile_count_x
+        {
+            get { return map_tile_count_x; }
+        }
         private int map_tile_count_y;
+        public int Map_tile_count_y
+        {
+            get { return map_tile_count_y; }
+        }
         private int map_cursor_pos_x_hover = 0;
         private int map_cursor_pos_y_hover = 0;
         private int map_cursor_pos_x_down = 0;
@@ -64,24 +81,50 @@ namespace MapEditor
         private int gcCounter = 0;
         private bool newTileSelected = false;
         private bool layerChanged = false;
+        private string projectPath;
+        private ViewMode viewMode = ViewMode.all;
+        public ViewMode ViewModeSetting
+        {
+            set
+            {
+                viewMode = value;
+                CombineInnerMapOutput();
+                CombineOverlayMapOutput();
+                pictureBox_map.Image = map_output;
+            }
+        }
+        private bool dim = true;
+        public bool Dim
+        {
+            set
+            {
+                dim = value;
+                CombineInnerMapOutput();
+                CombineOverlayMapOutput();
+                pictureBox_map.Image = map_output;
+            }
+        }
+
         static private Graphics graphics;
 
 
-        public Map(string name, int id, int tile_count_x, int tile_count_y, int tileset_id, string project_path, ref PictureBox pb_tileset, ref PictureBox pb_map)
+        public Map(string name, int id, int map_tile_count_x, int map_tile_count_y, int tileset_id, string projectPath, string filename, ref PictureBox pb_tileset, ref PictureBox pb_map)
         {
             this.name = name;
             this.id = id;
             this.tileset_id = tileset_id;
-            map_width = tile_count_x * tile_height;
-            map_height = tile_count_y * tile_width;
+            this.filename = filename;
+            map_width = map_tile_count_x * tile_height;
+            map_height = map_tile_count_y * tile_width;
             pictureBox_tileset = pb_tileset;
             pictureBox_map = pb_map;
-            map_tile_count_y = tile_count_y;
-            map_tile_count_x = tile_count_x;
+            this.map_tile_count_y = map_tile_count_y;
+            this.map_tile_count_x = map_tile_count_x;
+            this.projectPath = projectPath;
 
             for (int i = 0; i < 3; i++)
             {
-                map_layer_tileinfo[i] = new int[map_tile_count_x * map_tile_count_y];
+                map_layer_tileinfo[i] = new int[this.map_tile_count_x * this.map_tile_count_y];
                 for (int j = 0; j < map_layer_tileinfo[i].Length; j++)
                 {
                     map_layer_tileinfo[i][j] = -1;
@@ -114,18 +157,89 @@ namespace MapEditor
             graphics.Clear(Color.Transparent);
             graphics.Dispose();
 
-            CombineMaskMapOutput(map_layer_index);
+            CombineInnerMapOutput();
             CombineOverlayMapOutput();
 
             pictureBox_map.Width = map_width;
             pictureBox_map.Height = map_height;
             pictureBox_map.Image = map_output;
-            LoadTileSet(project_path);
+            LoadTileSet();
+            SaveToFile();
         }
-        public Map(string projectpath, string filepath, ref PictureBox pb_tileset, ref PictureBox pb_map)
-        {
 
-            using (var fileStream = File.OpenRead(filepath))
+        public Map(Map map, string name, int id)
+        {
+            this.name = name;
+            this.id = id;
+            filename = name + id;
+            tileset_id = map.tileset_id;
+            map_width = map.map_tile_count_x * tile_height;
+            map_height = map.map_tile_count_y * tile_width;
+            map_tile_count_y = map.map_tile_count_y;
+            map_tile_count_x = map.map_tile_count_x;
+            pictureBox_tileset = map.pictureBox_tileset;
+            pictureBox_map = map.pictureBox_map;
+            projectPath = map.projectPath;
+
+            for (int i = 0; i < 3; i++)
+            {
+                map_layer_tileinfo[i] = new int[map_tile_count_x * map_tile_count_y];
+                for (int j = 0; j < map_layer_tileinfo[i].Length; j++)
+                {
+                    map_layer_tileinfo[i][j] = -1;
+                }
+                for (int x = 0; x < map_tile_count_x; x++)
+                {
+                    for (int y = 0; y < map_tile_count_y; y++)
+                    {
+                        map_layer_tileinfo[i][y * map_tile_count_x + x] = map.map_layer_tileinfo[i][y * map_tile_count_x + x];
+                    }
+                }
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                map_layer[i] = new Bitmap(map_width, map_height);
+                graphics = Graphics.FromImage(map_layer[i]);
+                graphics.Clear(Color.Transparent);
+                graphics.Dispose();
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                map_layer_opaque[i] = new Bitmap(map_width, map_height);
+                graphics = Graphics.FromImage(map_layer_opaque[i]);
+                graphics.Clear(Color.Transparent);
+                graphics.Dispose();
+            }
+            map_overlay = new Bitmap(map_width, map_height);
+            graphics = Graphics.FromImage(map_overlay);
+            graphics.Clear(Color.Transparent);
+            graphics.Dispose();
+            map_output = new Bitmap(map_width, map_height);
+            graphics = Graphics.FromImage(map_output);
+            graphics.Clear(BGColor);
+            graphics.Dispose();
+            map_combined = new Bitmap(map_width, map_height);
+            graphics = Graphics.FromImage(map_combined);
+            graphics.Clear(Color.Transparent);
+            graphics.Dispose();
+            LoadTileSet();
+            UpdateGraphicsFromTileinfo();
+
+            CombineInnerMapOutput();
+            CombineOverlayMapOutput();
+
+            pictureBox_map.Width = map_width;
+            pictureBox_map.Height = map_height;
+            pictureBox_map.Image = map_output;
+
+        }
+
+        public Map(string projectPath, string filename, ref PictureBox pb_tileset, ref PictureBox pb_map)
+        {
+            this.filename = filename;
+            this.projectPath = projectPath;
+            using (var fileStream = File.OpenRead(projectPath + "\\" + filename + ".mapinfo"))
             {
                 using (var streamReader = new StreamReader(fileStream, Encoding.Unicode))
                 {
@@ -183,7 +297,7 @@ namespace MapEditor
                     }
                     pictureBox_tileset = pb_tileset;
                     pictureBox_map = pb_map;
-                    
+
 
                     for (int i = 0; i < 3; i++)
                     {
@@ -213,36 +327,41 @@ namespace MapEditor
                     graphics.Dispose();
                     pictureBox_map.Width = map_width;
                     pictureBox_map.Height = map_height;
-                    
-                    LoadTileSet(projectpath);
-                    for (int layer = 1; layer <= 3; layer++)
-                    {
-                        graphics = Graphics.FromImage(map_layer[layer - 1]);
-                        graphics.Clear(Color.Transparent);
-                        for (int x = 0; x < map_tile_count_x; x++)
-                        {
-                            for (int y = 0; y < map_tile_count_y; y++)
-                            {
-                                if(map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] != -1)
-                                    graphics.DrawImage(tile[map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] % tile_count_x, map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] / tile_count_x], tile_width * x, tile_height * y);
-                                
-                            }
-
-                        }
-                        graphics.Dispose();
-                    }
-                    CombineMaskMapOutput(map_layer_index);
-                    CombineOverlayMapOutput();
+                    LoadTileSet();
+                    UpdateGraphicsFromTileinfo();
                     pictureBox_map.Image = map_output;
                 }
             }
         }
-        public void LoadTileSet(string project_path)
-        {
-            if(!File.Exists(project_path + "\\tiles\\" + tileset_id + ".tile"))
-                ((Image)Properties.Resources.ResourceManager.GetObject("tileset_" + tileset_id)).Save(project_path + "\\tiles\\" + tileset_id + ".tile");
 
-            tileset = Image.FromFile(project_path + "\\tiles\\" + tileset_id + ".tile");
+        private void UpdateGraphicsFromTileinfo()
+        {
+            for (int layer = 1; layer <= 3; layer++)
+            {
+                graphics = Graphics.FromImage(map_layer[layer - 1]);
+                graphics.Clear(Color.Transparent);
+                for (int x = 0; x < map_tile_count_x; x++)
+                {
+                    for (int y = 0; y < map_tile_count_y; y++)
+                    {
+                        if (map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] != -1)
+                            graphics.DrawImage(tile[map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] % tile_count_x, map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] / tile_count_x], tile_width * x, tile_height * y);
+
+                    }
+
+                }
+                graphics.Dispose();
+            }
+            CombineInnerMapOutput();
+            CombineOverlayMapOutput();
+        }
+
+        public void LoadTileSet()
+        {
+            if (!File.Exists(projectPath + "\\tiles\\" + tileset_id + ".tile"))
+                ((Image)Properties.Resources.ResourceManager.GetObject("tileset_" + tileset_id)).Save(projectPath + "\\tiles\\" + tileset_id + ".tile");
+
+            tileset = Image.FromFile(projectPath + "\\tiles\\" + tileset_id + ".tile");
             tileset_overlay = new Bitmap(tileset.Width, tileset.Height);
             tileset_output = new Bitmap(tileset.Width, tileset.Height); ;
             graphics = Graphics.FromImage(tileset_overlay);
@@ -271,10 +390,10 @@ namespace MapEditor
                     graphics.Dispose();
                 }
             }
-
+            CombineTilesetOutput();
             SelectTilesStart(new Point(0, 0));
             SelectTilesEnd(new Point(0, 0));
-            CombineTilesetOutput();
+            
             pictureBox_tileset.ClientSize = new Size(tileset.Width, tileset.Height);
             pictureBox_tileset.Image = tileset_output;
             return;
@@ -327,7 +446,7 @@ namespace MapEditor
 
 
 
-        public void DrawMapOverlay(Point pos, MapBrush brush)
+        public void DrawMapOverlayPencil(Point pos, MapBrush brush)
         {
             int posx = pos.X / tile_width;
             int posy = pos.Y / tile_height;
@@ -345,16 +464,14 @@ namespace MapEditor
                 map_cursor_pos_y_hover = posy;
             }
 
-            if (brush == MapBrush.pencil)
-            {
-                graphics = Graphics.FromImage(map_overlay);
-                graphics.Clear(Color.Transparent);
-                graphics.DrawRectangle(new Pen(Color.Red, 2.0f), new Rectangle(posx * tile_width + 1, posy * tile_height + 1, tile_select_width - 2, tile_select_height - 2));
-                graphics.Dispose();
-                //CombineMaskMapOutput(map_layer_index);
-                CombineOverlayMapOutput();
-                pictureBox_map.Image = map_output;
-            }
+
+            graphics = Graphics.FromImage(map_overlay);
+            graphics.Clear(Color.Transparent);
+            graphics.DrawRectangle(new Pen(Color.Red, 2.0f), new Rectangle(posx * tile_width + 1, posy * tile_height + 1, tile_select_width - 2, tile_select_height - 2));
+            graphics.Dispose();
+            CombineOverlayMapOutput();
+            pictureBox_map.Image = map_output;
+            
         }
 
         public void DrawTiles(Point pos, MapBrush brush)
@@ -395,16 +512,19 @@ namespace MapEditor
                             if (tile_select_start_x + x == 0 && tile_select_start_y + y == 1)
                             {
                                 map_layer_tileinfo[map_layer_index - 1][(posy + y) * map_tile_count_x + posx + x] = -1;
-                            } 
+                            }
                         }
                         //Console.WriteLine("index: " + ((posy + y) * map_tile_count_x + posx + x) + "value: " + map_layer_tileinfo[layer - 1][(posy + y) * map_tile_count_x + x+posx]);
                     }
                 }
-
                 graphics.Dispose();
-                CombineMaskMapOutput(map_layer_index);
+                CombineInnerMapOutput();
                 CombineOverlayMapOutput();
                 pictureBox_map.Image = map_output;
+            }
+            else if (brush == MapBrush.rectangle)
+            {
+
             }
         }
 
@@ -427,11 +547,10 @@ namespace MapEditor
                     graphics.Dispose();
                 }
             }
-            CombineLayersMapOutput(layer);
-            CombineMaskMapOutput(layer);
+            //CombineLayersMapOutput();
+            CombineInnerMapOutput();
             CombineOverlayMapOutput();
             pictureBox_map.Image = map_output;
-
         }
 
         public void ClearMapOverlay()
@@ -439,14 +558,14 @@ namespace MapEditor
             graphics = Graphics.FromImage(map_overlay);
             graphics.Clear(Color.Transparent);
             graphics.Dispose();
-            CombineMaskMapOutput(map_layer_index);
+            CombineInnerMapOutput();
             CombineOverlayMapOutput();
             pictureBox_map.Image = map_output;
         }
 
-        public void SaveToFile(string project_path)
+        public void SaveToFile()
         {
-            using (StreamWriter file = new StreamWriter(project_path + "\\" + name + id + ".mapinfo", false, Encoding.Unicode))
+            using (StreamWriter file = new StreamWriter(projectPath + "\\" + filename + ".mapinfo", false, Encoding.Unicode))
             {
                 file.WriteLine(id);
                 file.WriteLine(name);
@@ -461,14 +580,127 @@ namespace MapEditor
                         {
                             file.WriteLine(map_layer_tileinfo[i][y * map_tile_count_x + x]);
                         }
-                    } 
+                    }
                 }
                 file.Close();
             }
         }
 
+        public void UpdateProperties(string name, int tileset_id, int map_tile_count_x, int map_tile_count_y)
+        {
+            this.name = name;
+            this.tileset_id = tileset_id;
 
+            int[][] temp_map_layer_tileinfo = new int[3][];
 
+            for (int i = 0; i < 3; i++)
+            {
+                temp_map_layer_tileinfo[i] = new int[map_tile_count_x * map_tile_count_y];
+                for (int j = 0; j < temp_map_layer_tileinfo[i].Length; j++)
+                {
+                    temp_map_layer_tileinfo[i][j] = -1;
+                }
+                for (int x = 0; x < map_tile_count_x && x < this.map_tile_count_x; x++)
+                {
+                    for (int y = 0; y < map_tile_count_y && y < this.map_tile_count_y; y++)
+                    {
+                        temp_map_layer_tileinfo[i][y * map_tile_count_x + x] = map_layer_tileinfo[i][y * this.map_tile_count_x + x];
+                    }
+                }
+            }
+            this.map_layer_tileinfo = temp_map_layer_tileinfo;
+            map_width = map_tile_count_x * tile_height;
+            map_height = map_tile_count_y * tile_width;
+            this.map_tile_count_y = map_tile_count_y;
+            this.map_tile_count_x = map_tile_count_x;
+            for (int i = 0; i < 3; i++)
+            {
+                map_layer[i] = new Bitmap(map_width, map_height);
+                graphics = Graphics.FromImage(map_layer[i]);
+                graphics.Clear(Color.Transparent);
+                graphics.Dispose();
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                map_layer_opaque[i] = new Bitmap(map_width, map_height);
+                graphics = Graphics.FromImage(map_layer_opaque[i]);
+                graphics.Clear(Color.Transparent);
+                graphics.Dispose();
+            }
+            map_overlay = new Bitmap(map_width, map_height);
+            graphics = Graphics.FromImage(map_overlay);
+            graphics.Clear(Color.Transparent);
+            graphics.Dispose();
+            map_output = new Bitmap(map_width, map_height);
+            graphics = Graphics.FromImage(map_output);
+            graphics.Clear(BGColor);
+            graphics.Dispose();
+            map_combined = new Bitmap(map_width, map_height);
+            graphics = Graphics.FromImage(map_combined);
+            graphics.Clear(Color.Transparent);
+            graphics.Dispose();
+            LoadTileSet();
+            for (int layer = 1; layer <= 3; layer++)
+            {
+                graphics = Graphics.FromImage(map_layer[layer - 1]);
+                graphics.Clear(Color.Transparent);
+                for (int x = 0; x < map_tile_count_x; x++)
+                {
+                    for (int y = 0; y < map_tile_count_y; y++)
+                    {
+                        if (map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] != -1)
+                            if(map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] < tile_count_x*tile_count_y)
+                                graphics.DrawImage(tile[map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] % tile_count_x, map_layer_tileinfo[layer - 1][y * map_tile_count_x + x] / tile_count_x], tile_width * x, tile_height * y);
+
+                    }
+
+                }
+                graphics.Dispose();
+            }
+            CombineInnerMapOutput();
+            CombineOverlayMapOutput();
+
+            CombineInnerMapOutput();
+            CombineOverlayMapOutput();
+
+            pictureBox_map.Width = map_width;
+            pictureBox_map.Height = map_height;
+            pictureBox_map.Image = map_output;
+            
+        }
+
+        public void DrawMapOverlayRectangle(Point pos, string state)
+        {
+
+        }
+        public void FillEverything()
+        {
+            if (map_layer_index == 3) return;
+            graphics = Graphics.FromImage(map_layer[map_layer_index - 1]);
+            graphics.Clear(Color.Transparent);
+            for (int x = 0; x < map_tile_count_x; x++)
+            {
+                for (int y = 0; y < map_tile_count_y; y++)
+                {
+                    graphics.DrawImage(tile[tile_select_start_x, tile_select_start_y],x*tile_width, y*tile_height);
+                    map_layer_tileinfo[map_layer_index - 1][y * map_tile_count_x + x] = (tile_select_start_y) * tile_count_x + tile_select_start_x;
+                    if (tile_select_start_x == 0 && tile_select_start_y == 1)
+                    {
+                        map_layer_tileinfo[map_layer_index - 1][y * map_tile_count_x + x] = -1;
+                    }                    
+                }
+            }
+            graphics.Dispose();
+            CombineInnerMapOutput();
+            CombineOverlayMapOutput();
+            pictureBox_map.Image = map_output;
+        }
+        public void UpdateGraphics(int layer)
+        {
+            pictureBox_map.ClientSize = new Size(map_width, map_height);
+            LoadTileSet();
+            SetLayer(layer);
+        }
 
 
 
@@ -555,29 +787,49 @@ namespace MapEditor
             graphics.Dispose();
         }
 
-        private void CombineMaskMapOutput(int masklayer)
+        private void CombineInnerMapOutput()
         {
-            if (masklayer == 0)
+            if (map_layer_index == 0)
                 return;
 
             graphics = Graphics.FromImage(map_combined);
             graphics.Clear(BGColor);
 
-            if (masklayer != 1) graphics.FillRectangle(new SolidBrush(Color.FromArgb(75, 0, 0, 0)), 0, 0, map_width, map_height);
-            for (int i = 0; i < 3; i++)
+            if (map_layer_index != 1 && dim) graphics.FillRectangle(new SolidBrush(Color.FromArgb(75, 0, 0, 0)), 0, 0, map_width, map_height);
+            if (viewMode == ViewMode.all)
             {
-                if (masklayer - 1 != i)
+                for (int i = 0; i < 3; i++)
                 {
-                    graphics.DrawImageUnscaled(map_layer_opaque[i], 0, 0);
+                    if (map_layer_index - 1 != i)
+                    {
+                        graphics.DrawImageUnscaled(map_layer_opaque[i], 0, 0);
+                    }
+                } 
+            }
+            else
+            {
+                for (int i = 0; i < map_layer_index; i++)
+                {
+                    if (map_layer_index - 1 != i)
+                    {
+                        graphics.DrawImageUnscaled(map_layer_opaque[i], 0, 0);
+                    }
                 }
             }
-            graphics.DrawImage(map_layer[masklayer - 1], 0, 0);
-            for (int i = masklayer - 1; i < 3; i++)
+            graphics.DrawImage(map_layer[map_layer_index - 1], 0, 0);
+            if (viewMode == ViewMode.all)
             {
-                if (masklayer - 1 != i)
+                for (int i = map_layer_index - 1; i < 3; i++)
                 {
-                    graphics.DrawImageUnscaled(map_layer_opaque[i], 0, 0);
-                }
+                    if (map_layer_index - 1 != i)
+                    {
+                        graphics.DrawImageUnscaled(map_layer_opaque[i], 0, 0);
+                    }
+                } 
+            }
+            else
+            {
+                graphics.DrawImageUnscaled(map_layer_opaque[map_layer_index-1], 0, 0);
             }
             graphics.Dispose();
         }

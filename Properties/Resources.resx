@@ -178,4 +178,148 @@
   <data name="Sugar Cube-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sugar Cube-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="tileset_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_19" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_19.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_23" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_23.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_27" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_27.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_29" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_29.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_34" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_34.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_36.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_37" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_37.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_38" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_38.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_39.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_41" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_42" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_42.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_43" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_43.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_44" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_44.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_46" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_46.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_47" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_47.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_49" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_49.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tileset_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tileset_9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

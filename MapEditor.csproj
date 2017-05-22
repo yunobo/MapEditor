@@ -86,6 +86,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Map.cs" />
+    <Compile Include="MapPropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MapPropertiesForm.Designer.cs">
+      <DependentUpon>MapPropertiesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapPropertiesForm.resx">
+      <DependentUpon>MapPropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewProjectForm.resx">
       <DependentUpon>NewProjectForm.cs</DependentUpon>
@@ -179,6 +188,54 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Map Editing-48.ico" />
+    <None Include="Resources\tileset_49.png" />
+    <None Include="Resources\tileset_48.png" />
+    <None Include="Resources\tileset_47.png" />
+    <None Include="Resources\tileset_46.png" />
+    <None Include="Resources\tileset_45.png" />
+    <None Include="Resources\tileset_44.png" />
+    <None Include="Resources\tileset_43.png" />
+    <None Include="Resources\tileset_42.png" />
+    <None Include="Resources\tileset_41.png" />
+    <None Include="Resources\tileset_40.png" />
+    <None Include="Resources\tileset_39.png" />
+    <None Include="Resources\tileset_38.png" />
+    <None Include="Resources\tileset_37.png" />
+    <None Include="Resources\tileset_36.png" />
+    <None Include="Resources\tileset_35.png" />
+    <None Include="Resources\tileset_34.png" />
+    <None Include="Resources\tileset_33.png" />
+    <None Include="Resources\tileset_32.png" />
+    <None Include="Resources\tileset_31.png" />
+    <None Include="Resources\tileset_30.png" />
+    <None Include="Resources\tileset_29.png" />
+    <None Include="Resources\tileset_28.png" />
+    <None Include="Resources\tileset_27.png" />
+    <None Include="Resources\tileset_26.png" />
+    <None Include="Resources\tileset_25.png" />
+    <None Include="Resources\tileset_24.png" />
+    <None Include="Resources\tileset_23.png" />
+    <None Include="Resources\tileset_22.png" />
+    <None Include="Resources\tileset_21.png" />
+    <None Include="Resources\tileset_20.png" />
+    <None Include="Resources\tileset_19.png" />
+    <None Include="Resources\tileset_18.png" />
+    <None Include="Resources\tileset_17.png" />
+    <None Include="Resources\tileset_16.png" />
+    <None Include="Resources\tileset_15.png" />
+    <None Include="Resources\tileset_14.png" />
+    <None Include="Resources\tileset_13.png" />
+    <None Include="Resources\tileset_12.png" />
+    <None Include="Resources\tileset_11.png" />
+    <None Include="Resources\tileset_10.png" />
+    <None Include="Resources\tileset_9.png" />
+    <None Include="Resources\tileset_8.png" />
+    <None Include="Resources\tileset_7.png" />
+    <None Include="Resources\tileset_6.png" />
+    <None Include="Resources\tileset_5.png" />
+    <None Include="Resources\tileset_4.png" />
+    <None Include="Resources\tileset_3.png" />
+    <None Include="Resources\tileset_2.png" />
     <None Include="Resources\Sugar Cube-50.png" />
     <None Include="Resources\002-Woods01.png" />
     <None Include="Resources\1.png" />
